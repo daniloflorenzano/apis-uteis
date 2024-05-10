@@ -1,6 +1,6 @@
 @CEP.Api_HostAddress = http://localhost:5284
 
-GET {{CEP.Api_HostAddress}}/todos/
+GET {{CEP.Api_HostAddress}}/cep/27516120
 Accept: application/json
 
 ###
