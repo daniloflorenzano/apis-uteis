@@ -8,9 +8,6 @@ app.MapGet("/cep/{cep}", async (string cep) =>
 {
     try
     {
-        // var providerHandler = new CepProviderHandler<BrasilApi>();
-        // var cepDto = await providerHandler.GetCepDtoAsync(cep);
-        
         var executor = new CepRequestsExecutor();
         var cepDto = await executor.ReturnFirstEndendResultFromAllProviders(cep);
 
