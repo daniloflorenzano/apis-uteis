@@ -12,7 +12,7 @@ public class CepProviderHandler<T> : ICepProviderHandler where T : CepResponseBa
     public async Task<CepDto> GetCepDtoAsync(string cep)
     {
         using var client = new HttpClient();
-        client.Timeout = TimeSpan.FromSeconds(10);
+        client.Timeout = TimeSpan.FromSeconds(0.1);
         
         var url = string.Format(BaseUrl, cep);
         var response = await client.GetAsync(url);
