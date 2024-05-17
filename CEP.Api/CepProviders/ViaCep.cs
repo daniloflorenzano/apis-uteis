@@ -1,6 +1,6 @@
-namespace CEP.Api.CepProvidersResponses;
+namespace CEP.Api.CepProviders;
 
-public class ViaCep : CepResponseBase 
+public class ViaCep : CepProviderBase 
 {
     public string cep { get; set; }
     public string logradouro { get; set; }
@@ -22,7 +22,8 @@ public class ViaCep : CepResponseBase
             State = uf,
             City = localidade,
             Neighborhood = bairro,
-            Street = logradouro
+            Street = logradouro,
+            ApiProvider = nameof(ViaCep)
         };
     }
 }

@@ -1,6 +1,6 @@
-namespace CEP.Api.CepProvidersResponses;
+namespace CEP.Api.CepProviders;
 
-public class BrasilApi : CepResponseBase
+public class BrasilApi : CepProviderBase
 {
     public string Cep { get; set; } = string.Empty;
     public string State { get; set; } = string.Empty;
@@ -19,7 +19,8 @@ public class BrasilApi : CepResponseBase
             State = State,
             City = City,
             Neighborhood = Neighborhood,
-            Street = Street
+            Street = Street,
+            ApiProvider = nameof(BrasilApi)
         };
     }
 }

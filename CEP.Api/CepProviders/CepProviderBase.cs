@@ -1,8 +1,8 @@
 using System.Text.Json.Serialization;
 
-namespace CEP.Api;
+namespace CEP.Api.CepProviders;
 
-public abstract class CepResponseBase
+public abstract class CepProviderBase
 {
     [JsonIgnore]
     public abstract string BaseUrl { get; } 

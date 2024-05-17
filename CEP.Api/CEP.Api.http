@@ -4,8 +4,3 @@ GET {{CEP.Api_HostAddress}}/cep/27516120
 Accept: application/json
 
 ###
-
-GET {{CEP.Api_HostAddress}}/todos/1
-Accept: application/json
-
-###
