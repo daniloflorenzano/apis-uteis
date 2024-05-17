@@ -1,6 +1,6 @@
 namespace CEP.Api.CepProviders;
 
-public class BrasilApi : CepProviderBase
+public class BrasilApi : ICepProvider
 {
     public string Cep { get; set; } = string.Empty;
     public string State { get; set; } = string.Empty;
@@ -9,9 +9,9 @@ public class BrasilApi : CepProviderBase
     public string Street { get; set; } = string.Empty;
     
     
-    public override string BaseUrl { get; } = "https://brasilapi.com.br/api/cep/v1/{0}";
+    public string BaseUrl { get; } = "https://brasilapi.com.br/api/cep/v1/{0}";
     
-    public override CepDto MapToDto()
+    public CepDto MapToDto()
     {
         return new CepDto
         {

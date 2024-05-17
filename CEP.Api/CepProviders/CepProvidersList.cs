@@ -10,7 +10,7 @@ public class CepProvidersList : IList<ICepProviderHandler>
     {
         _listImplementation = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(x => x.GetTypes())
-            .Where(x => x.BaseType == typeof(CepProviderBase))
+            .Where(x => typeof(ICepProvider).IsAssignableFrom(x) && x is { IsInterface: false, IsAbstract: false })
             .Select(x =>
                 (ICepProviderHandler)Activator.CreateInstance(typeof(CepProviderHandler<>).MakeGenericType(x))!)
             .ToList();

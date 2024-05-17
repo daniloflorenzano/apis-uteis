@@ -1,6 +1,6 @@
 namespace CEP.Api.CepProviders;
 
-public class ViaCep : CepProviderBase 
+public class ViaCep : ICepProvider 
 {
     public string cep { get; set; }
     public string logradouro { get; set; }
@@ -13,8 +13,8 @@ public class ViaCep : CepProviderBase
     public string ddd { get; set; }
     public string siafi { get; set; }
 
-    public override string BaseUrl { get; } = "https://viacep.com.br/ws/{0}/json/";
-    public override CepDto MapToDto()
+    public string BaseUrl { get; } = "https://viacep.com.br/ws/{0}/json/";
+    public CepDto MapToDto()
     {
         return new CepDto
         {

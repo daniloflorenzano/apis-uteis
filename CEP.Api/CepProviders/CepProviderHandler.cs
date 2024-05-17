@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace CEP.Api.CepProviders;
 
-public class CepProviderHandler<T> : ICepProviderHandler where T : CepProviderBase
+public class CepProviderHandler<T> : ICepProviderHandler where T : ICepProvider
 {
     private string ProviderName { get; } = typeof(T).Name;
     private JsonSerializerOptions JsonSerializerOptions { get; } = new() { PropertyNameCaseInsensitive = true };
