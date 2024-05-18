@@ -55,7 +55,7 @@ public class AddressFinderTests
     public async Task FindCepSequential_Should_Work()
     {
         var cepService = new AddressFinder(_cepProvidersList);
-        for (var i = 27521600; i < 27521610; i++)
+        for (var i = 27521600; i < 27521650; i++)
         {
             try
             {

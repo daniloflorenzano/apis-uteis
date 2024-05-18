@@ -7,10 +7,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="de3bbe9d-5705-45b3-8834-45e53866607b" name="Changes" comment="organiza solução">
+    <list default="true" id="de3bbe9d-5705-45b3-8834-45e53866607b" name="Changes" comment="trata erros na camada de API">
+      <change afterPath="$PROJECT_DIR$/GenericServices.Address/External/ProvidersDTOs/Correios.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.CEP.Api/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.CEP.Api/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GenericServices.Api/CEP.Api.http" beforeDir="false" afterPath="$PROJECT_DIR$/GenericServices.Api/CEP.Api.http" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GenericServices.Api/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GenericServices.Api/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GenericServices.Address/AddressFinder.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GenericServices.Address/AddressFinder.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GenericServices.Address/External/CepProviderApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/GenericServices.Address/External/CepProviderApi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GenericServices.Address/GenericServices.Address.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/GenericServices.Address/GenericServices.Address.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TestProject/Address/AddressFinderTests.cs" beforeDir="false" afterPath="$PROJECT_DIR$/TestProject/Address/AddressFinderTests.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +31,7 @@
     <setting file="mock://C:/Users/DaniloMaia/Documents/Faculdade/apis-uteis/CEP.Api/CepProviders/BrasilApi.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/DaniloMaia/Documents/Faculdade/apis-uteis/CEP.Api/CepProviders/CepProviderHandler.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/DaniloMaia/Documents/Faculdade/apis-uteis/CEP.Api/CepService.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/GenericServices.Address/Connected Services/CorreioWebService/CorreioWebService.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/GenericServices.Api/Program.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/DaniloMaia/Documents/Faculdade/apis-uteis/GenericServices.Api/Program.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/TestProject/Address/AddressFinderTests.cs" root0="FORCE_HIGHLIGHTING" />
@@ -45,36 +49,40 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    ".NET Launch Settings Profile.CEP.Api: http.executor": "Debug",
-    "864417d0-a2ef-4bed-9493-01d1c97b08d1.executor": "Debug",
-    "HTTP Request.CEP.Api | #1 (1).executor": "Run",
-    "HTTP Request.CEP.Api | #1.executor": "Run",
-    "HTTP Request.CEP.Api | #2.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.CEP.Api: http.executor&quot;: &quot;Debug&quot;,
+    &quot;864417d0-a2ef-4bed-9493-01d1c97b08d1.executor&quot;: &quot;Debug&quot;,
+    &quot;HTTP Request.CEP.Api | #1 (1).executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.CEP.Api | #1.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.CEP.Api | #2.executor&quot;: &quot;Run&quot;,
+    &quot;HTTP Request.CEP.Api | #3.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "rider.external.source.directories": [
-      "C:\\Users\\DaniloMaia\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache",
-      "C:\\Users\\DaniloMaia\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache",
-      "C:\\Users\\DaniloMaia\\AppData\\Local\\Symbols\\src"
+  &quot;keyToStringList&quot;: {
+    &quot;rider.external.source.directories&quot;: [
+      &quot;C:\\Users\\DaniloMaia\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\DecompilerCache&quot;,
+      &quot;C:\\Users\\DaniloMaia\\AppData\\Roaming\\JetBrains\\Rider2024.1\\resharper-host\\SourcesCache&quot;,
+      &quot;C:\\Users\\DaniloMaia\\AppData\\Local\\Symbols\\src&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected=".NET Launch Settings Profile.CEP.Api: http">
     <configuration name="CEP.Api | #1" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/CEP.Api/CEP.Api.http" requestIdentifier="#1" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="CEP.Api | #2" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/GenericServices.Api/CEP.Api.http" index="2" requestIdentifier="#2" runType="Run single request">
+      <method v="2" />
+    </configuration>
+    <configuration name="CEP.Api | #3" type="HttpClient.HttpRequestRunConfigurationType" factoryName="HTTP Request" temporary="true" nameIsGenerated="true" path="$PROJECT_DIR$/GenericServices.Api/CEP.Api.http" index="3" requestIdentifier="#3" runType="Run single request">
       <method v="2" />
     </configuration>
     <configuration name="CEP.Api: http" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
@@ -94,6 +102,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="HTTP Request.CEP.Api | #3" />
         <item itemvalue="HTTP Request.CEP.Api | #2" />
         <item itemvalue="HTTP Request.CEP.Api | #1" />
       </list>
@@ -109,7 +118,7 @@
       <updated>1715908547493</updated>
       <workItem from="1715908548517" duration="7911000" />
       <workItem from="1715988121532" duration="161000" />
-      <workItem from="1715988301065" duration="13853000" />
+      <workItem from="1715988301065" duration="16985000" />
     </task>
     <task id="LOCAL-00001" summary="melhora metodo de busca de cep em paralelo e adiciona metodo de busca sequencial&#10;tambem cria lista de provedores como singleton e adiciona projeto de testes">
       <option name="closed" value="true" />
@@ -151,7 +160,15 @@
       <option name="project" value="LOCAL" />
       <updated>1716002281877</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="trata erros na camada de API">
+      <option name="closed" value="true" />
+      <created>1716002849575</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1716002849575</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -166,6 +183,7 @@
     <MESSAGE value="refatoracao simples em CepProviderHandler.cs" />
     <MESSAGE value="melhora classes e suas responsabilidades" />
     <MESSAGE value="organiza solução" />
-    <option name="LAST_COMMIT_MESSAGE" value="organiza solução" />
+    <MESSAGE value="trata erros na camada de API" />
+    <option name="LAST_COMMIT_MESSAGE" value="trata erros na camada de API" />
   </component>
 </project>
