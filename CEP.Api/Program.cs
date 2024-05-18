@@ -12,8 +12,8 @@ app.MapGet("/cep/{cep}", async (CepProvidersList cepProvidersList, string cep) =
 {
     try
     {
-        var executor = new CepService(cepProvidersList);
-        var cepDto = await executor.FindCepParallel(cep);
+        var executor = new AddressFinder(cepProvidersList);
+        var cepDto = await executor.FindByCepParallel(cep);
 
         return Results.Ok(cepDto);
     }

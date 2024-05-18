@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace CEP.Api;
 
-public record CepDto
+public record Address
 {
     public string Cep { get; set; } = string.Empty;
 

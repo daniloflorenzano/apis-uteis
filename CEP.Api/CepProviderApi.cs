@@ -3,9 +3,9 @@ using CEP.Api.CepProviders.Exceptions;
 
 namespace CEP.Api.CepProviders;
 
-public class CepProviderHandler<T> : ICepProviderHandler where T : ICepProvider
+public class CepProviderApi<T> : ICepProviderApi where T : ICepProviderApiResponse
 {
-    public async Task<CepDto> GetCepDtoAsync(string cep, CancellationToken cancellationToken = default)
+    public async Task<ICepProviderApiResponse> Request(string cep, CancellationToken cancellationToken = default)
     {
         using var client = new HttpClient();
 
@@ -22,16 +22,14 @@ public class CepProviderHandler<T> : ICepProviderHandler where T : ICepProvider
 
         var content = await response.Content.ReadAsStringAsync(cancellationToken);
 
-        var providerResponse = JsonSerializer.Deserialize<T>(content) ??
+        var result = JsonSerializer.Deserialize<T>(content, new JsonSerializerOptions() {PropertyNameCaseInsensitive = true}) ??
                                throw new JsonException($"Falha ao deserializar CEP '{cep}' no provedor {providerName}.");
-        
-        var dto = providerResponse.MapToDto();
         
         // necessário esse tratamento pois engraçadinhos como o ViaCEP retornam 'status 200: erro true' quando não encontram o CEP
         // afinal, o que é um erro se não um sucesso em encontrar um erro? ¯\_(ツ)_/¯ 
-        if (string.IsNullOrEmpty(dto.City))
+        if (!result.FieldsAreValid())
             throw new CepNotFoundException($"CEP '{cep}' não encontrado no provedor '{providerName}'.");
         
-        return dto;
+        return result;
     }
 }

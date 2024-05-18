@@ -1,6 +1,6 @@
 namespace CEP.Api.CepProviders;
 
-public class BrasilApi : ICepProvider
+public class BrasilApi : ICepProviderApiResponse
 {
     public string Cep { get; set; } = string.Empty;
     public string State { get; set; } = string.Empty;
@@ -11,9 +11,9 @@ public class BrasilApi : ICepProvider
     
     public string BaseUrl { get; } = "https://brasilapi.com.br/api/cep/v1/{0}";
     
-    public CepDto MapToDto()
+    public Address MapToDto()
     {
-        return new CepDto
+        return new Address
         {
             Cep = Cep,
             State = State,
@@ -22,5 +22,12 @@ public class BrasilApi : ICepProvider
             Street = Street,
             ApiProvider = nameof(BrasilApi)
         };
+    }
+
+    public bool FieldsAreValid()
+    {
+        return !string.IsNullOrWhiteSpace(Cep) && !string.IsNullOrWhiteSpace(State) &&
+               !string.IsNullOrWhiteSpace(City) && !string.IsNullOrWhiteSpace(Neighborhood) &&
+               !string.IsNullOrWhiteSpace(Street);
     }
 }

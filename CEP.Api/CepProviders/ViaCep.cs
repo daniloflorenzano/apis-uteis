@@ -1,6 +1,6 @@
 namespace CEP.Api.CepProviders;
 
-public class ViaCep : ICepProvider 
+public class ViaCep : ICepProviderApiResponse 
 {
     public string cep { get; set; }
     public string logradouro { get; set; }
@@ -14,9 +14,9 @@ public class ViaCep : ICepProvider
     public string siafi { get; set; }
 
     public string BaseUrl { get; } = "https://viacep.com.br/ws/{0}/json/";
-    public CepDto MapToDto()
+    public Address MapToDto()
     {
-        return new CepDto
+        return new Address
         {
             Cep = cep,
             State = uf,
@@ -25,5 +25,12 @@ public class ViaCep : ICepProvider
             Street = logradouro,
             ApiProvider = nameof(ViaCep)
         };
+    }
+
+    public bool FieldsAreValid()
+    {
+        return !string.IsNullOrWhiteSpace(cep) && !string.IsNullOrWhiteSpace(logradouro) &&
+               !string.IsNullOrWhiteSpace(bairro) && !string.IsNullOrWhiteSpace(localidade) &&
+               !string.IsNullOrWhiteSpace(uf);
     }
 }

@@ -2,23 +2,23 @@
 
 namespace CEP.Api.CepProviders;
 
-public class CepProvidersList : IList<ICepProviderHandler>
+public class CepProvidersList : IList<ICepProviderApi>
 {
-    private IList<ICepProviderHandler> _listImplementation;
+    private readonly IList<ICepProviderApi> _listImplementation;
 
     public CepProvidersList()
     {
         _listImplementation = AppDomain.CurrentDomain.GetAssemblies()
             .SelectMany(x => x.GetTypes())
-            .Where(x => typeof(ICepProvider).IsAssignableFrom(x) && x is { IsInterface: false, IsAbstract: false })
+            .Where(x => typeof(ICepProviderApiResponse).IsAssignableFrom(x) && x is { IsInterface: false, IsAbstract: false })
             .Select(x =>
-                (ICepProviderHandler)Activator.CreateInstance(typeof(CepProviderHandler<>).MakeGenericType(x))!)
+                (ICepProviderApi)Activator.CreateInstance(typeof(CepProviderApi<>).MakeGenericType(x))!)
             .ToList();
     }
 
     # region IList Implementation
 
-    public IEnumerator<ICepProviderHandler> GetEnumerator()
+    public IEnumerator<ICepProviderApi> GetEnumerator()
     {
         return _listImplementation.GetEnumerator();
     }
@@ -28,7 +28,7 @@ public class CepProvidersList : IList<ICepProviderHandler>
         return ((IEnumerable)_listImplementation).GetEnumerator();
     }
 
-    public void Add(ICepProviderHandler item)
+    public void Add(ICepProviderApi item)
     {
         _listImplementation.Add(item);
     }
@@ -38,17 +38,17 @@ public class CepProvidersList : IList<ICepProviderHandler>
         _listImplementation.Clear();
     }
 
-    public bool Contains(ICepProviderHandler item)
+    public bool Contains(ICepProviderApi item)
     {
         return _listImplementation.Contains(item);
     }
 
-    public void CopyTo(ICepProviderHandler[] array, int arrayIndex)
+    public void CopyTo(ICepProviderApi[] array, int arrayIndex)
     {
         _listImplementation.CopyTo(array, arrayIndex);
     }
 
-    public bool Remove(ICepProviderHandler item)
+    public bool Remove(ICepProviderApi item)
     {
         return _listImplementation.Remove(item);
     }
@@ -57,12 +57,12 @@ public class CepProvidersList : IList<ICepProviderHandler>
 
     public bool IsReadOnly => _listImplementation.IsReadOnly;
 
-    public int IndexOf(ICepProviderHandler item)
+    public int IndexOf(ICepProviderApi item)
     {
         return _listImplementation.IndexOf(item);
     }
 
-    public void Insert(int index, ICepProviderHandler item)
+    public void Insert(int index, ICepProviderApi item)
     {
         _listImplementation.Insert(index, item);
     }
@@ -72,7 +72,7 @@ public class CepProvidersList : IList<ICepProviderHandler>
         _listImplementation.RemoveAt(index);
     }
 
-    public ICepProviderHandler this[int index]
+    public ICepProviderApi this[int index]
     {
         get => _listImplementation[index];
         set => _listImplementation[index] = value;

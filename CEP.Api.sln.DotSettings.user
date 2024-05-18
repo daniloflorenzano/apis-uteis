@@ -9,6 +9,9 @@
 	
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=864417d0_002Da2ef_002D4bed_002D9493_002D01d1c97b08d1/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="FindCepParallel_Should_Work" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
   &lt;TestAncestor&gt;&#xD;
-    &lt;TestId&gt;NUnit3x::6474C7EF-F868-483F-B880-372824D59F40::net8.0::TestProject.CepServiceTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::6474C7EF-F868-483F-B880-372824D59F40::net8.0::TestProject.AddressFinderTests.FindCepSequential_Should_Work&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::6474C7EF-F868-483F-B880-372824D59F40::net8.0::TestProject.AddressFinderTests.FindCepParallel_Should_Work&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::6474C7EF-F868-483F-B880-372824D59F40::net8.0::TestProject.AddressFinderTests.FindCepParallel_Should_Work_Single_Cep&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::6474C7EF-F868-483F-B880-372824D59F40::net8.0::TestProject.AddressFinderTests.FindCepSequential_Should_Work_Single_Cep&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
