@@ -1,4 +1,4 @@
-﻿namespace CEP.Api.CepProviders;
+﻿namespace CEP.Api.CepProviders.Exceptions;
 
 [Serializable]
 public class CepNotFoundException : Exception
