@@ -1,4 +1,7 @@
-namespace CEP.Api.CepProviders;
+// ReSharper disable InconsistentNaming
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+
+namespace GenericServices.Address.External.ProvidersDTOs;
 
 public class ViaCep : ICepProviderApiResponse 
 {

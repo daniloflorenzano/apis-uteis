@@ -1,5 +1,5 @@
-using CEP.Api;
-using CEP.Api.CepProviders;
+using GenericServices.Address;
+using GenericServices.Address.External;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 
@@ -8,7 +8,7 @@ builder.Services.AddSingleton<CepProvidersList>();
 
 var app = builder.Build();
 
-app.MapGet("/cep/{cep}", async (CepProvidersList cepProvidersList, string cep) =>
+app.MapGet("/address/find-by-cep/{cep}", async (CepProvidersList cepProvidersList, string cep) =>
 {
     try
     {

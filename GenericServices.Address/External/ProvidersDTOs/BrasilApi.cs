@@ -1,4 +1,4 @@
-namespace CEP.Api.CepProviders;
+namespace GenericServices.Address.External.ProvidersDTOs;
 
 public class BrasilApi : ICepProviderApiResponse
 {

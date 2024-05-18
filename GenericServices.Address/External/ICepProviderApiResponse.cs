@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
 
-namespace CEP.Api.CepProviders;
+namespace GenericServices.Address.External;
 
 /// <summary>
 /// DTO para representar o retorno da API de um provedor de CEP.

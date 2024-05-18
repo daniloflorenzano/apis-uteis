@@ -1,7 +1,7 @@
-using CEP.Api.CepProviders;
-// ReSharper disable All
+using GenericServices.Address.Exceptions;
+using GenericServices.Address.External;
 
-namespace CEP.Api;
+namespace GenericServices.Address;
 
 public class AddressFinder
 {
@@ -17,41 +17,43 @@ public class AddressFinder
     /// </summary>
     /// <param name="cep"></param>
     /// <returns></returns>
-    public async Task<Address?> FindByCepParallel(string cep)
+    /// <exception cref="CepNotValidException"></exception>
+    /// <exception cref="AddressNotFoundException"></exception>
+    /// <exception cref="MissingCepProvidersException"></exception>
+    public async Task<Address> FindByCepParallel(string cep)
     {
+        if (_cepProvidersList.Count == 0)
+            throw new MissingCepProvidersException();
+        
+        if (!CEP.IsValid(cep))
+            throw new CepNotValidException($"'{cep}' não é um CEP válido.");
+        
         var cancellationTokenSource = new CancellationTokenSource();
         var taskList = _cepProvidersList.Select(x => x.Request(cep, cancellationTokenSource.Token)).ToList();
+        
         var providerResponse = await RunTasks(taskList, cancellationTokenSource);
-        
-        if (providerResponse is null)
-            return null;
-        
-        var address = providerResponse.MapToDto();
-        
-        if (address.City is null)
-            return null;
-        
-        return address;
+
+        return ReturnAddressIfValid(providerResponse, cep);
     }
 
     // Referências:
     // https://stackoverflow.com/questions/41426418/task-whenany-what-happens-with-remaining-running-tasks
     // https://books.google.com.br/books?id=nsaUAwAAQBAJ&pg=PA26&lpg=PA26#v=onepage&q&f=false
-    private async Task<ICepProviderApiResponse?> RunTasks<T>(List<Task<T>> taskList, CancellationTokenSource cancellationTokenSource) where T : ICepProviderApiResponse
+    private static async Task<ICepProviderApiResponse?> RunTasks<T>(List<Task<T>> taskList, CancellationTokenSource cancellationTokenSource) where T : ICepProviderApiResponse?
     {
         var timeout = TimeSpan.FromSeconds(15);
         T dummyCancelledResult = default!;
 
-        Task<T> timeoutOrCancellationTask = Task
+        var timeoutOrCancellationTask = Task
             .Delay(timeout, cancellationTokenSource.Token)
             .ContinueWith(t => dummyCancelledResult, TaskContinuationOptions.ExecuteSynchronously);
-
+        
         try
         {
             do
             {
                 // Adiciona a task de timeout e cancelamento na lista de ainda pendentes
-                var tasksToWaitAndTimeout = taskList.Union<Task<T>>(new[] { timeoutOrCancellationTask}!).ToList();
+                var tasksToWaitAndTimeout = taskList.Union(new[] { timeoutOrCancellationTask}).ToList();
 
                 // Aguarda a primeira task terminar
                 var finishedTask = await Task.WhenAny(tasksToWaitAndTimeout).ConfigureAwait(false);
@@ -88,18 +90,45 @@ public class AddressFinder
     }
 
     /// <summary>
+    /// Verifica se a resposta do provedor é válida e retorna o endereço.
+    /// </summary>
+    /// <param name="providerResponse"></param>
+    /// <returns></returns>
+    /// <exception cref="AddressNotFoundException"></exception>
+    private static Address ReturnAddressIfValid(ICepProviderApiResponse? providerResponse, string cep)
+    {
+        var address = providerResponse?.MapToDto();
+        
+        if (address?.City is null)
+            throw new AddressNotFoundException($"Endereço não encontrado para o CEP '{cep}'");
+        
+        return address;
+    }
+
+    /// <summary>
     /// Busca em todos os provedores de CEP de forma sequencial e retorna o primeiro resultado encontrado.
     /// </summary>
     /// <param name="cep"></param>
     /// <returns></returns>
-    /// <exception cref="Exception"></exception>
-    public async Task<Address?> FindByCepSequential(string cep)
+    /// <exception cref="CepNotValidException"></exception>
+    /// <exception cref="AddressNotFoundException"></exception>
+    /// <exception cref="MissingCepProvidersException"></exception>
+    public async Task<Address> FindByCepSequential(string cep)
     {
+        if (!CEP.IsValid(cep))
+            throw new CepNotValidException($"'{cep}' não é um CEP válido.");
+        
+        if (_cepProvidersList.Count == 0)
+            throw new MissingCepProvidersException();
+        
         foreach (var provider in _cepProvidersList)
         {
             try
             {
                 var providerResponse = await provider.Request(cep);
+                if (providerResponse is null)
+                    continue;
+                
                 return providerResponse.MapToDto();
             }
             catch (Exception)
@@ -108,6 +137,6 @@ public class AddressFinder
             }
         }
 
-        return null;
+        throw new AddressNotFoundException($"Endereço não encontrado para o CEP '{cep}'");
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace CEP.Api.CepProviders;
+namespace GenericServices.Address.External;
 
 public class CepProvidersList : IList<ICepProviderApi>
 {

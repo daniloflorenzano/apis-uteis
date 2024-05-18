@@ -1,8 +1,10 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CEP.Api", "CEP.Api\CEP.Api.csproj", "{AB67D892-E1CF-483E-9D3B-00A9534CD2F7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericServices.Api", "GenericServices.Api\GenericServices.Api.csproj", "{AB67D892-E1CF-483E-9D3B-00A9534CD2F7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject", "TestProject\TestProject.csproj", "{6474C7EF-F868-483F-B880-372824D59F40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenericServices.Address", "GenericServices.Address\GenericServices.Address.csproj", "{F554DF97-2984-41DC-AF47-360D0E3306EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,5 +20,9 @@ Global
 		{6474C7EF-F868-483F-B880-372824D59F40}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6474C7EF-F868-483F-B880-372824D59F40}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6474C7EF-F868-483F-B880-372824D59F40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F554DF97-2984-41DC-AF47-360D0E3306EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F554DF97-2984-41DC-AF47-360D0E3306EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F554DF97-2984-41DC-AF47-360D0E3306EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F554DF97-2984-41DC-AF47-360D0E3306EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

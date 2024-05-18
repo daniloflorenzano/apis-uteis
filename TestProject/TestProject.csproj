@@ -22,7 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\CEP.Api\CEP.Api.csproj" />
+      <ProjectReference Include="..\GenericServices.Address\GenericServices.Address.csproj" />
     </ItemGroup>
 
 </Project>
