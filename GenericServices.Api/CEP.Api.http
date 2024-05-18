@@ -1,6 +1,16 @@
 @CEP.Api_HostAddress = http://localhost:5284
 
+// Cep valido existente
 GET {{CEP.Api_HostAddress}}/address/find-by-cep/27521605
 Accept: application/json
+###
 
+// Cep valido inexistente
+GET {{CEP.Api_HostAddress}}/address/find-by-cep/27521601
+Accept: application/json
+###
+
+// Cep invalido
+GET {{CEP.Api_HostAddress}}/address/find-by-cep/275216ds
+Accept: application/json
 ###

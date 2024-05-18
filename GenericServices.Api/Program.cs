@@ -1,4 +1,5 @@
 using GenericServices.Address;
+using GenericServices.Address.Exceptions;
 using GenericServices.Address.External;
 
 var builder = WebApplication.CreateSlimBuilder(args);
@@ -20,6 +21,14 @@ app.MapGet("/address/find-by-cep/{cep}", async (CepProvidersList cepProvidersLis
     catch (Exception e)
     {
         Console.WriteLine(e);
+        
+        if (e is CepNotValidException)
+            return Results.BadRequest(e.Message);
+        
+        if (e is AddressNotFoundException)
+            return Results.NotFound(e.Message);
+            
+        
         return Results.Problem(e.Message);
     }
 });
