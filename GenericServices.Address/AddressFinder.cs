@@ -65,15 +65,23 @@ public class AddressFinder
                 // Caso a task tenha terminado com sucesso e com um dos resultados esperados
                 if (finishedTask.Status == TaskStatus.RanToCompletion)
                 {
-                    // Cancelar as tarefas restantes
-                    await cancellationTokenSource.CancelAsync();
-                    var result = await finishedTask as ICepProviderApiResponse;
-                    return result;
+                    var result = await finishedTask;
+
+                    if (result is not null)
+                    {
+                        // Cancelar as tarefas restantes
+                        await cancellationTokenSource.CancelAsync();
+                        
+                        return result;
+                    }
                 }
 
                 // Caso contrário, remove a task que terminou e continua aguardando as outras
                 taskList.Remove(finishedTask);
             } while (!cancellationTokenSource.Token.IsCancellationRequested && taskList.Count != 0);
+
+            // Se todas as tarefas terminaram e nenhuma retornou um resultado válido
+            return null;
         }
         catch (Exception)
         {
