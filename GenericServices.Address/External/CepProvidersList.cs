@@ -4,16 +4,22 @@ namespace GenericServices.Address.External;
 
 public class CepProvidersList : IList<ICepProviderApi>
 {
+    public static CepProvidersList InstanceEmpty { get; } = new(true);
+    public static CepProvidersList Instance { get; } = new();
+    
     private readonly IList<ICepProviderApi> _listImplementation;
 
-    public CepProvidersList()
+    private CepProvidersList(bool empty = false)
     {
-        _listImplementation = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(x => x.GetTypes())
-            .Where(x => typeof(ICepProviderApiResponse).IsAssignableFrom(x) && x is { IsInterface: false, IsAbstract: false })
-            .Select(x =>
-                (ICepProviderApi)Activator.CreateInstance(typeof(CepProviderApi<>).MakeGenericType(x))!)
-            .ToList();
+        if (empty)
+            _listImplementation = new List<ICepProviderApi>();
+        else
+            _listImplementation = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(x => x.GetTypes())
+                .Where(x => typeof(ICepProviderApiResponse).IsAssignableFrom(x) && x is { IsInterface: false, IsAbstract: false })
+                .Select(x =>
+                    (ICepProviderApi)Activator.CreateInstance(typeof(CepProviderApi<>).MakeGenericType(x))!)
+                .ToList();
     }
 
     # region IList Implementation

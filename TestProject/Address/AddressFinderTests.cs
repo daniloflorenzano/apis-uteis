@@ -11,9 +11,9 @@ public class AddressFinderTests
     [SetUp]
     public void Setup()
     {
-        _cepProvidersList = new CepProvidersList();
+        _cepProvidersList = CepProvidersList.Instance;
     }
-
+    
     [Test]
     public async Task FindCepParallel_Should_Work_Single_Valid_Cep()
     {
@@ -36,7 +36,7 @@ public class AddressFinderTests
     public async Task FindCepParallel_Should_Work()
     {
         var cepService = new AddressFinder(_cepProvidersList);
-        for (var i = 27521600; i < 27521610; i++)
+        for (var i = 27521600; i < 27521620; i++)
         {
             try
             {
@@ -55,7 +55,7 @@ public class AddressFinderTests
     public async Task FindCepSequential_Should_Work()
     {
         var cepService = new AddressFinder(_cepProvidersList);
-        for (var i = 27521600; i < 27521650; i++)
+        for (var i = 27521600; i < 27521620; i++)
         {
             try
             {

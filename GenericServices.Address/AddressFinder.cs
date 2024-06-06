@@ -96,13 +96,7 @@ public class AddressFinder
         // Caso tenha ocorrido cancelamento ou timeout
         return null;
     }
-
-    /// <summary>
-    /// Verifica se a resposta do provedor é válida e retorna o endereço.
-    /// </summary>
-    /// <param name="providerResponse"></param>
-    /// <returns></returns>
-    /// <exception cref="AddressNotFoundException"></exception>
+    
     private static Address ReturnAddressIfValid(ICepProviderApiResponse? providerResponse, string cep)
     {
         var address = providerResponse?.MapToDto();
